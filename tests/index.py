@@ -35,7 +35,7 @@ class TestExpectedInput(unittest.TestCase):
 
     def test_more_than_two_number_input(self):
         self.assertEqual(add("1,2,1"), 4)
-        self.assertEqual(add("0,1,1211"), 1212)
+        self.assertEqual(add("0,1,3"), 4)
 
     def test_new_line_delimiter(self):
         """should sucessfully calculate the sum when the input contains newline character"""
@@ -68,6 +68,12 @@ class TestExpectedInput(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             add("//;\n-1;-2;-4")
         self.assertEqual(str(context.exception), f"{err_msg}: -1,-2,-4")
+
+    def test_ignore_number_greater_than_thousand(self):
+        """should ignore numbers which are bigger than 1000 and calculate the sum"""
+        self.assertEqual(add("0,1,1001,1002"), 1)
+        self.assertEqual(add("0,1,1000,10001"), 1001)
+        self.assertEqual(add("0,1,1000,1000"), 2001)
 
 if __name__ == "__main__":
     unittest.main()

@@ -34,11 +34,15 @@ def add(num_strs):
     # Check if the number is valid
     num_stripped = num.strip()
     if num_stripped:
-      if num_stripped.startswith('-'):
+      temp_num = num_stripped.lstrip('+')
+
+      if temp_num.startswith('-'):
         # Collect negative numbers
-        negative_numbers.append(num_stripped)
-      if num_stripped.lstrip('+').isdigit():
-        parsed_number_list.append(int(num_stripped))
+        negative_numbers.append(temp_num)
+
+      # ignore numbers that are greater than 1000 inclusive
+      if temp_num.isdigit() and int(temp_num) <= 1000:
+        parsed_number_list.append(int(temp_num))
 
   # If there are negative numbers, raise an error with all of them
   if negative_numbers:
