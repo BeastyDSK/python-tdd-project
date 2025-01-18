@@ -53,5 +53,11 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("1\n,"), 1)
         self.assertEqual(add("\n-1"), -1)
 
+    def test_explicit_delimiter(self):
+        """should return the sum when the input has one or more numbers separated by a value other than comma and newline"""
+        self.assertEqual(add("//;\n1;"),1)
+        self.assertEqual(add("//;\n1;-2"),-1)
+        self.assertEqual(add("//\\n\\"),0)
+
 if __name__ == "__main__":
     unittest.main()
