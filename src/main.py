@@ -27,7 +27,23 @@ def add(num_strs):
   number_list = re.split(regex, num_strs)
 
   # Parse the string values to integers and filter only the valid numbers
-  parsed_number_list = [int(num) for num in number_list if num.lstrip('+-').isdigit()]
+  parsed_number_list = []
+  negative_numbers = []
+
+  for num in number_list:
+    # Check if the number is valid
+    num_stripped = num.strip()
+    if num_stripped:
+      if num_stripped.startswith('-'):
+        # Collect negative numbers
+        negative_numbers.append(num_stripped)
+      if num_stripped.lstrip('+').isdigit():
+        parsed_number_list.append(int(num_stripped))
+
+  # If there are negative numbers, raise an error with all of them
+  if negative_numbers:
+    raise ValueError(f"Negative numbers not allowed: {','.join(negative_numbers)}")
+
 
   # Calculate the sum
   total_sum = sum(parsed_number_list)

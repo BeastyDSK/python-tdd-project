@@ -49,5 +49,25 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("//;\n1;"),1)
         self.assertEqual(add("//\\n\\"),0)
 
+    def test_negative_numbers(self):
+        """should throw an error when negative value is passed in the input"""
+
+        err_msg = "Negative numbers not allowed"
+        with self.assertRaises(ValueError) as context:
+            add("1,-2\n")
+        self.assertEqual(str(context.exception), f"{err_msg}: -2")
+        
+        with self.assertRaises(ValueError) as context:
+            add("\n-1\n,")
+        self.assertEqual(str(context.exception), f"{err_msg}: -1")
+        
+        with self.assertRaises(ValueError) as context:
+            add("-1,-4\n,-2\n")
+        self.assertEqual(str(context.exception), f"{err_msg}: -1,-4,-2")
+        
+        with self.assertRaises(ValueError) as context:
+            add("//;\n-1;-2;-4")
+        self.assertEqual(str(context.exception), f"{err_msg}: -1,-2,-4")
+
 if __name__ == "__main__":
     unittest.main()
