@@ -1,3 +1,5 @@
+import re
+
 def add(num_strs):
   # Provided input is not of type string.
   if not isinstance(num_strs, str):
@@ -10,7 +12,7 @@ def add(num_strs):
   # Handle two numbers in a comma-separated string
   
   # Split the input by comma to get the numbers as a list
-  number_list = num_strs.split(',')
+  number_list = re.split(r'[,\n]', num_strs)
 
   # Parse the string values to integers and filter only the valid numbers
   parsed_number_list = [int(num) for num in number_list if num.lstrip('+-').isdigit()]

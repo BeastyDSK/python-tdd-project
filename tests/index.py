@@ -43,6 +43,15 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("-1,-1,2"), 0)
         self.assertEqual(add("-1,-1,+2"), 0)
         self.assertEqual(add("+,+,-"), 0)
+        self.assertEqual(add("-1,-1\n+2"), 0)
+
+    def test_new_line_delimiter(self):
+        """should sucessfully calculate the sum when the input contains newline character"""
+        self.assertEqual(add("1\n1"), 2)
+        self.assertEqual(add("\n"), 0)
+        self.assertEqual(add("1\n"), 1)
+        self.assertEqual(add("1\n,"), 1)
+        self.assertEqual(add("\n-1"), -1)
 
 if __name__ == "__main__":
     unittest.main()
