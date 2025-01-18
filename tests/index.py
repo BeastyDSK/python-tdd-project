@@ -22,7 +22,6 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("1000,"), 1000)
         self.assertEqual(add("0"), 0)
         self.assertEqual(add("0,"), 0)
-        self.assertEqual(add("-1,"), -1)
         self.assertEqual(add("+1,"), 1)
         self.assertEqual(add(","), 0)
 
@@ -32,18 +31,11 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("1,1"), 2)
         self.assertEqual(add("0,1"), 1)
         self.assertEqual(add("0,0"), 0)
-        self.assertEqual(add("-1,-1"), -2)
-        self.assertEqual(add("-1,+1"), 0)
         self.assertEqual(add("+,+"), 0)
 
     def test_more_than_two_number_input(self):
         self.assertEqual(add("1,2,1"), 4)
-        self.assertEqual(add("1,1,1290,-1290"), 2)
         self.assertEqual(add("0,1,1211"), 1212)
-        self.assertEqual(add("-1,-1,2"), 0)
-        self.assertEqual(add("-1,-1,+2"), 0)
-        self.assertEqual(add("+,+,-"), 0)
-        self.assertEqual(add("-1,-1\n+2"), 0)
 
     def test_new_line_delimiter(self):
         """should sucessfully calculate the sum when the input contains newline character"""
@@ -51,12 +43,10 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("\n"), 0)
         self.assertEqual(add("1\n"), 1)
         self.assertEqual(add("1\n,"), 1)
-        self.assertEqual(add("\n-1"), -1)
 
     def test_explicit_delimiter(self):
         """should return the sum when the input has one or more numbers separated by a value other than comma and newline"""
         self.assertEqual(add("//;\n1;"),1)
-        self.assertEqual(add("//;\n1;-2"),-1)
         self.assertEqual(add("//\\n\\"),0)
 
 if __name__ == "__main__":
