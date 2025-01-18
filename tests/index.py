@@ -24,6 +24,7 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("0,"), 0)
         self.assertEqual(add("-1,"), -1)
         self.assertEqual(add("+1,"), 1)
+        self.assertEqual(add(","), 0)
 
     def test_two_number_input(self):
         """should return the sum when the input has two numbers"""
@@ -33,6 +34,15 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("0,0"), 0)
         self.assertEqual(add("-1,-1"), -2)
         self.assertEqual(add("-1,+1"), 0)
+        self.assertEqual(add("+,+"), 0)
+
+    def test_more_than_two_number_input(self):
+        self.assertEqual(add("1,2,1"), 4)
+        self.assertEqual(add("1,1,1290,-1290"), 2)
+        self.assertEqual(add("0,1,1211"), 1212)
+        self.assertEqual(add("-1,-1,2"), 0)
+        self.assertEqual(add("-1,-1,+2"), 0)
+        self.assertEqual(add("+,+,-"), 0)
 
 if __name__ == "__main__":
     unittest.main()

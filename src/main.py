@@ -10,16 +10,13 @@ def add(num_strs):
   # Handle two numbers in a comma-separated string
   
   # Split the input by comma to get the numbers as a list
-  num_list = num_strs.split(',')
+  number_list = num_strs.split(',')
 
-  # Parse the numbers
-  num_one = int(num_list[0])
+  # Parse the string values to integers and filter only the valid numbers
+  parsed_number_list = [int(num) for num in number_list if num.lstrip('+-').isdigit()]
 
-  # Check if there is a second number
-  if len(num_list) < 2 or not num_list[1].lstrip('-+').isdigit():
-    return num_one
-
-  num_two = int(num_list[1])
-
-  # Return the sum of the two numbers
-  return num_one + num_two
+  # Calculate the sum
+  total_sum = sum(parsed_number_list)
+  
+  # Return the sum
+  return total_sum
