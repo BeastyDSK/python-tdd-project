@@ -15,7 +15,24 @@ class TestUnexceptedInput(unittest.TestCase):
 
 # To be handled
 class TestExpectedInput(unittest.TestCase):
-    pass
+    def test_single_number_input(self):
+        """should return the first number when the input has only one number"""
+        self.assertEqual(add("1"), 1)
+        self.assertEqual(add("1000"), 1000)
+        self.assertEqual(add("1000,"), 1000)
+        self.assertEqual(add("0"), 0)
+        self.assertEqual(add("0,"), 0)
+        self.assertEqual(add("-1,"), -1)
+        self.assertEqual(add("+1,"), 1)
+
+    def test_two_number_input(self):
+        """should return the sum when the input has two numbers"""
+        self.assertEqual(add("1,2"), 3)
+        self.assertEqual(add("1,1"), 2)
+        self.assertEqual(add("0,1"), 1)
+        self.assertEqual(add("0,0"), 0)
+        self.assertEqual(add("-1,-1"), -2)
+        self.assertEqual(add("-1,+1"), 0)
 
 if __name__ == "__main__":
     unittest.main()
