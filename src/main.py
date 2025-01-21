@@ -41,8 +41,10 @@ def add(num_strs):
         negative_numbers.append(temp_num)
 
       # ignore numbers that are greater than 1000 inclusive
-      if temp_num.isdigit() and int(temp_num) <= 1000:
-        parsed_number_list.append(int(temp_num))
+      if temp_num.isdigit():
+        temp_num_parsed = int(temp_num)
+        if temp_num_parsed < 500 or temp_num_parsed > 1000:
+          parsed_number_list.append(temp_num_parsed)
 
   # If there are negative numbers, raise an error with all of them
   if negative_numbers:
