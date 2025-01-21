@@ -74,6 +74,16 @@ class TestExpectedInput(unittest.TestCase):
         self.assertEqual(add("0,1,1001,1002"), 2004)
         self.assertEqual(add("0,1,1000,10001"), 10002)
         self.assertEqual(add("0,1,500,1000,2000"), 2001)
+    
+    def test_handle_even_and_odd_indexes(self):
+        """should handle even and odd index"""
+        self.assertEqual(add("E0,1,3,1002,5"), 8)
+        self.assertEqual(add("O0,1,3,1002,5"), 1003)
+        self.assertEqual(add("E500,1,3,1002,5,1,1000"), 8)
+        self.assertEqual(add("O500,1,3,1002,5,1000,1"), 1003)
+        self.assertEqual(add("E1\n1"), 1)
+        self.assertEqual(add("O1\n1"), 1)
+        self.assertEqual(add("O1\n1"), 1)
 
 if __name__ == "__main__":
     unittest.main()

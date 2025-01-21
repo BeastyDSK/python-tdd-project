@@ -30,11 +30,11 @@ def add(num_strs):
   parsed_number_list = []
   negative_numbers = []
 
-  for num in number_list:
+  for index in range(0, len(number_list)):
     # Check if the number is valid
-    num_stripped = num.strip()
+    num_stripped = number_list[index].strip()
     if num_stripped:
-      temp_num = num_stripped.lstrip('+')
+      temp_num = num_stripped.lstrip('+EO')
 
       if temp_num.startswith('-'):
         # Collect negative numbers
@@ -44,7 +44,16 @@ def add(num_strs):
       if temp_num.isdigit():
         temp_num_parsed = int(temp_num)
         if temp_num_parsed < 500 or temp_num_parsed > 1000:
-          parsed_number_list.append(temp_num_parsed)
+          is_even_str = num_strs.startswith('E')
+          is_odd_str = num_strs.startswith('O')
+
+          if is_even_str or is_odd_str:
+            if is_even_str and index % 2 == 0:
+              parsed_number_list.append(temp_num_parsed)
+            if is_odd_str and index % 2 == 1:
+              parsed_number_list.append(temp_num_parsed)
+          else:
+            parsed_number_list.append(temp_num_parsed)
 
   # If there are negative numbers, raise an error with all of them
   if negative_numbers:
